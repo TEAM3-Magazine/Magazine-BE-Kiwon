@@ -30,10 +30,8 @@ public class LikeService {
         }
         User user = userRepository.findById(userId).orElseThrow(NotFoundUser::new);
         Post post = postRepository.findById(postId).orElseThrow(NotFoundPost::new);
-//        Optional<Post> post = Optional.ofNullable(boardRepository.findById(boardId))
-//                .orElseThrow(() -> new CustomException(BOARD_NOT_FOUND));
-//        Optional<User> user = Optional.ofNullable(userRepository.findById(likesrequestDto.getUserId()))
-//                .orElseThrow(() -> new CustomException(EMAIL_NOT_FOUND));
+
+
         Like like = new Like();
         post.addLikelist(like);
         user.addUsertoLike(like);
@@ -44,8 +42,7 @@ public class LikeService {
     @Transactional
     public void delete(Long userId, Long postId) {
         Like like = likeRepository.findByUser_UserIdAndPost_PostId(userId, postId).orElseThrow(NotFoundLike::new);
-//        Optional<Likelist> likelist = Optional.ofNullable(likesRepository.findByUser_IdAndPost_Id(userId, postId))
-//                .orElseThrow(() -> new CustomException(BOARD_NOT_FOUND));
+
         likeRepository.delete(like);
     }
 }

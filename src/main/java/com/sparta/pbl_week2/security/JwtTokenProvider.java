@@ -33,7 +33,7 @@ public class JwtTokenProvider {
     private final long REFRESH_TOKEN_VALID_TIME = 60 * 60 * 24 * 7 * 1000L;   // 1주
 
     private final UserDetailsService userDetailsService;
-//    private final TokenRepository tokenRepository;
+    //    private final TokenRepository tokenRepository;
     private final UserRepository userRepository;
 
     // 객체 초기화, secretKey를 Base64로 인코딩한다.
@@ -48,9 +48,6 @@ public class JwtTokenProvider {
         return this.createToken(userPk, ACCESS_TOKEN_VALID_TIME);
     }
 
-//    public String createRefreshToken(String userPk, List<String> roles) {
-//        return this.createToken(userPk, roles, REFRESH_TOKEN_VALID_TIME);
-//    }
 
     public String createToken(String userPk, long tokenValid) {
         Claims claims = Jwts.claims().setSubject(userPk); // JWT payload 에 저장되는 정보단위
@@ -85,13 +82,6 @@ public class JwtTokenProvider {
         return null;
     }
 
-//    // Request의 Header에서 token 값을 가져옵니다. "X-AUTH-TOKEN" : "TOKEN값'
-//    public String resolveRefreshToken(HttpServletRequest request) {
-//        if (request.getHeader("REFRESH_TOKEN") != null)
-//            return request.getHeader("REFRESH_TOKEN");
-//        return null;
-//    }
-
     // 토큰의 유효성 + 만료일자 확인
     public boolean validateToken(String jwtToken) {
         try {
@@ -105,30 +95,7 @@ public class JwtTokenProvider {
 
     // 어세스 토큰 헤더 설정
     public void setHeaderAccessToken(HttpServletResponse response, String accessToken) {
-        response.setHeader("Authorization", accessToken);
+        response.setHeader("Authorization", "Bearer " + accessToken);
     }
-//
-//    // 리프레시 토큰 헤더 설정
-//    public void setHeaderRefreshToken(HttpServletResponse response, String refreshToken) {
-//        response.setHeader("REFRESH_TOKEN", refreshToken);
-//    }
-//
-//    // RefreshToken 존재유무 확인
-//    public boolean existsRefreshToken(String refreshToken) {
-//        return tokenRepository.existsByRefreshToken(refreshToken);
-//    }
-//    @Transactional
-//    public void deleteRefreshToken(String refreshToken) {
-//        tokenRepository.deleteByRefreshToken(refreshToken);
-//    }
-//
-//    @Transactional
-//    public void saveRefreshToken(String refreshToken){
-//        tokenRepository.save(new RefreshToken(refreshToken));
-//    }
 
-//    // Email로 권한 정보 가져오기
-//    public List<String> getRoles(String username) {
-//        return userRepository.findByUsername(username).get().getRoles();
-//    }
 }

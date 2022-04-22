@@ -33,24 +33,6 @@ public class UserController {
 
     private final UserService userService;
 
-//    // 회원 로그인 페이지
-//    @GetMapping("/user/loginView")
-//    public String login() {
-//        return "login";
-//    }
-
-//    // 회원 가입 페이지
-//    @GetMapping("/user/signup")
-//    public String signup() {
-//        return "signup";
-//    }
-
-    //    // 회원 가입 요청 처리
-//    @PostMapping("/user/signup")
-//    public String registerUser(@RequestBody UserDto.Request requestDto) {
-//        userService.registerUser(requestDto);
-//        return "redirect:/user/loginView";
-//    }
     @PostMapping("/user/signup")
     public ResponseEntity<ResponseBody> registerUser(@Valid @RequestBody UserDto.Request requestDto, Errors errors) {
         userService.validateHandling(errors);
@@ -71,14 +53,9 @@ public class UserController {
         return new ResponseEntity<>(new UserDto.Response(userId, userEmail, userName),HttpStatus.OK);
     }
 
-
-
-
     @PostMapping("/user/login")
     public ResponseEntity<TokenBody> login(@RequestBody UserDto.LoginRequest loginRequest, HttpServletResponse response, Errors errors) {
-//        if (user != null){
-//            return new ResponseEntity<>(new Success(false, "이미 로그인 중입니다."), HttpStatus.BAD_REQUEST);
-//        }
+
         if (errors.hasErrors()) {
             for (FieldError error : errors.getFieldErrors()) {
                 throw new RestException(HttpStatus.BAD_REQUEST, error.getDefaultMessage());
@@ -87,9 +64,7 @@ public class UserController {
 
         TokenDto.Response token = userService.login(loginRequest);
 
-        response.setHeader("Authorization", token.getToken());
-//        response.setHeader("REFRESH_TOKEN", token.getREFRESH_TOKEN());
-
+        response.setHeader("Authorization", "Bearer " + token.getToken());
 
         return new ResponseEntity<>(new TokenBody("success","로그인 성공", token.getToken()), HttpStatus.OK);
     }

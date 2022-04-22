@@ -69,6 +69,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 회원 관리 처리 API 전부를 login 없이 허용
                 .antMatchers("/user/signup").permitAll()
                 .antMatchers("/user/login").permitAll()
+                .antMatchers("/user/logout").permitAll()
                 .antMatchers("/cors/**").permitAll()
                 // Get 요청 login 없이 허용
                 .antMatchers(HttpMethod.GET, "/api/post").permitAll()
@@ -118,7 +119,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             ObjectMapper mapper = new ObjectMapper();
             ObjectNode objectNode = mapper.createObjectNode();
             objectNode.put("result", "fail");
-            objectNode.put("msg", "로그인이 필요합니다");
+            objectNode.put("msg", "유효한 로그인 정보가 필요합니다");
 
             httpServletResponse.setContentType("application/json");
             PrintWriter out = httpServletResponse.getWriter();

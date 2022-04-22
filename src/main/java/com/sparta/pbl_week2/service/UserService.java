@@ -30,12 +30,6 @@ public class UserService {
 
 
 
-//    @Autowired
-//    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-//        this.userRepository = userRepository;
-//        this.passwordEncoder = passwordEncoder;
-//    }
-
     public void validateHandling(Errors errors) {
         for (FieldError error : errors.getFieldErrors()) {
             if(error.getField().equals("user_email")){
@@ -94,19 +88,14 @@ public class UserService {
             throw new InvalidLogin();
         }
         String accessToken = jwtTokenProvider.createAccessToken(user.getUserName());
-//        String refreshToken = jwtTokenProvider.createRefreshToken(user.getUsername(), user.getRoles());
-//        tokenRepository.save(new RefreshToken(refreshToken));
 
         return TokenDto.Response.builder()
                 .token(accessToken)
-//                .REFRESH_TOKEN(refreshToken)
                 .build();
     }
 
     @Transactional
     public void logout(HttpServletRequest request){
-//        String refreshToken = jwtTokenProvider.resolveRefreshToken(request);
-//        tokenRepository.deleteByRefreshToken(refreshToken);
         SecurityContextHolder.clearContext();
     }
 

@@ -19,32 +19,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         // 헤더에서 JWT 를 받아옵니다.
-        String accessToken = jwtTokenProvider.resolveAccessToken(request);
+        String Header = jwtTokenProvider.resolveAccessToken(request);
 //        String refreshToken = jwtTokenProvider.resolveRefreshToken(request);
         // 유효한 토큰인지 확인합니다.
-        if (accessToken != null) {
-            if (jwtTokenProvider.validateToken(accessToken)) {
+        if (Header != null) {
+            String tokenType = Header.substring(0,6);
+            String accessToken = Header.substring(7);
+            if (jwtTokenProvider.validateToken(accessToken) && tokenType.equals("Bearer")) {
                 this.setAuthentication(accessToken);
             }
-//            else if (!jwtTokenProvider.validateToken(accessToken) && refreshToken != null) {
-//                // 재발급 후, 컨텍스트에 다시 넣기
-//                /// 리프레시 토큰 검증
-//                boolean validateRefreshToken = jwtTokenProvider.validateToken(refreshToken);
-//                /// 리프레시 토큰 저장소 존재유무 확인
-//                boolean isRefreshToken = jwtTokenProvider.existsRefreshToken(refreshToken);
-//                if (validateRefreshToken && isRefreshToken) {
-//                    /// 리프레시 토큰으로 user 정보 가져오기
-//                    String username = jwtTokenProvider.getUserPk(refreshToken);
-//
-//                    /// 토큰 발급
-//                    String newAccessToken = jwtTokenProvider.createAccessToken(username, roles);
-//                    /// 헤더에 어세스 토큰 추가
-//                    jwtTokenProvider.setHeaderAccessToken(response, newAccessToken);
-//                    /// 컨텍스트에 넣기
-//                    this.setAuthentication(newAccessToken);
-//
-//                }
-//            }
         }
         chain.doFilter(request, response);
     }
