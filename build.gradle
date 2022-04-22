@@ -1,0 +1,60 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.6'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'com.pbl2'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+	implementation 'org.jetbrains:annotations:23.0.0'
+	compileOnly 'org.projectlombok:lombok'
+	runtimeOnly 'com.h2database:h2'
+	runtimeOnly 'mysql:mysql-connector-java'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+
+	// h2
+	runtimeOnly 'com.h2database:h2'
+
+	// lucy xss filter
+	implementation group: 'com.navercorp.lucy', name: 'lucy-xss', version: '1.6.3'
+	implementation 'com.navercorp.lucy:lucy-xss-servlet:2.0.0'
+	implementation 'org.apache.commons:commons-text:1.8'
+
+
+	// JWT
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
+	implementation 'commons-codec:commons-codec:1.15'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.2'
+	implementation 'com.auth0:java-jwt:3.19.1'
+
+	//Validation
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	//AutoRestart
+	implementation 'org.springframework.boot:spring-boot-devtools'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
