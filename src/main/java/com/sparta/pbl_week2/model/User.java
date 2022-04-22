@@ -1,6 +1,7 @@
 package com.sparta.pbl_week2.model;
 
 import com.sparta.pbl_week2.dto.UserDto;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor // 기본 생성자를 만들어줍니다.
 @Entity // DB 테이블 역할을 합니다.
 public class User {
+
 
     // ID가 자동으로 생성 및 증가합니다.
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +31,9 @@ public class User {
     @Column(name = "user_password", nullable = false)
     private String userPassword;
 
+    @Column(name = "user_password_check", nullable = false)
+    private String userPasswordCheck;
+
     @OneToMany(mappedBy = "user")
     List<Post> posts = new ArrayList<>();
 
@@ -37,10 +42,14 @@ public class User {
 
     public void addUsertoLike(Like like) { like.setUser(this);}
 
+    @Builder
     public User(UserDto.Request request) {
         this.userEmail = request.getUser_email();
         this.userName = request.getUser_name();
         this.userPassword = request.getUser_password();
+        this.userPasswordCheck = request.getUser_password_check();
+//     모르겠다 시발 
+
     }
 
     public User(String fail){

@@ -73,11 +73,11 @@ public class UserService {
 
 
         // 패스워드 암호화
-        String password = passwordEncoder.encode(requestDto.getUser_password());
-        String email = requestDto.getUser_email();
-
-        User user = new User(new UserDto.Request(email, username, password, password));
-        userRepository.save(user);
+//        String password = passwordEncoder.encode(requestDto.getUser_password());
+//        String email = requestDto.getUser_email();
+//
+//        User user = new User(new UserDto.Request(email, username, password, password));
+//        userRepository.save(user);
     }
 
     @Transactional
@@ -91,6 +91,7 @@ public class UserService {
 
         return TokenDto.Response.builder()
                 .token(accessToken)
+//                .REFRESH_TOKEN(refreshToken)
                 .build();
     }
 
