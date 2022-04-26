@@ -48,7 +48,7 @@ public class User {
         this.userName = request.getUser_name();
         this.userPassword = request.getUser_password();
         this.userPasswordCheck = request.getUser_password_check();
-//     모르겠다 시발 
+
 
     }
 

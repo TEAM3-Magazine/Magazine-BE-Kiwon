@@ -9,6 +9,7 @@ import com.sparta.pbl_week2.model.User;
 import com.sparta.pbl_week2.repository.UserRepository;
 import com.sparta.pbl_week2.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,6 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
     private static final String ADMIN_TOKEN = "AAABnv/xRVklrnYxKZ0aHgTBcXukeZygoC";
-
 
 
     public void validateHandling(Errors errors) {
@@ -73,11 +73,11 @@ public class UserService {
 
 
         // 패스워드 암호화
-//        String password = passwordEncoder.encode(requestDto.getUser_password());
-//        String email = requestDto.getUser_email();
-//
-//        User user = new User(new UserDto.Request(email, username, password, password));
-//        userRepository.save(user);
+        String password = passwordEncoder.encode(requestDto.getUser_password());
+        String email = requestDto.getUser_email();
+
+        User user = new User(new UserDto.Request(email, username, password, password));
+        userRepository.save(user);
     }
 
     @Transactional
@@ -88,6 +88,8 @@ public class UserService {
             throw new InvalidLogin();
         }
         String accessToken = jwtTokenProvider.createAccessToken(user.getUserName());
+//        String refreshToken = jwtTokenProvider.createRefreshToken(user.getUsername(), user.getRoles());
+//        tokenRepository.save(new RefreshToken(refreshToken));
 
         return TokenDto.Response.builder()
                 .token(accessToken)
@@ -97,6 +99,8 @@ public class UserService {
 
     @Transactional
     public void logout(HttpServletRequest request){
+//        String refreshToken = jwtTokenProvider.resolveRefreshToken(request);
+//        tokenRepository.deleteByRefreshToken(refreshToken);
         SecurityContextHolder.clearContext();
     }
 

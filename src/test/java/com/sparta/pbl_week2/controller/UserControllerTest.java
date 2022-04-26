@@ -1,33 +1,34 @@
-//package com.sparta.pbl_week2.controller;
-//
-//import com.sparta.pbl_week2.dto.UserDto;
-//import com.sparta.pbl_week2.model.User;
-//import org.junit.jupiter.api.*;
-//import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-//import org.springframework.boot.test.context.SpringBootTest;
-//
-//import javax.transaction.Transactional;
-//
-//import static org.junit.jupiter.api.Assertions.assertEquals;
-//import static org.junit.jupiter.api.Assertions.assertNull;
-//
-//@Disabled
-//@Transactional
-//@SpringBootTest
-//@AutoConfigureAfter
-//class UserControllerTest {
-//    private UserController userController;
-//
-//    @BeforeEach
-//    void setUp() {
-//        userController = new UserController();
+package com.sparta.pbl_week2.controller;
+
+import com.sparta.pbl_week2.dto.UserDto;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.test.web.servlet.ResultActions;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+
+@DisplayName("회원가입 테스트")
+class UserControllerTest extends BaseControllerTest {
+
+    @Test
+    @DisplayName("회원가입 성공")
+    void createUser() throws Exception {
+        UserDto userDto = new UserDto();
+
+    }
+}
+
+//    @Test
+//    @DisplayName("로그인 테스트")
+//    void login() {
+//        UserController userController = new UserController();
+//        userController.login();
 //    }
 //
 //    @Test
-//    void testGetUser() {
-//        UserDto userDto = userController.getUser(1);
-//        assertEquals("John", userDto.getFirstName());
-//        assertEquals("Doe", userDto.getLastName());
-//        assertEquals("
-//
+//    @DisplayName("로그아웃 테스트")
+//    void logout() {
+//        UserController userController = new UserController();
+//        userController.logout();
+//    }
 //}
