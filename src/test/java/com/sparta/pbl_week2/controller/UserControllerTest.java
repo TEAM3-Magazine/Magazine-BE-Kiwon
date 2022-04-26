@@ -1,21 +1,20 @@
 package com.sparta.pbl_week2.controller;
 
-import com.sparta.pbl_week2.dto.UserDto;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.springframework.test.web.servlet.ResultActions;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.web.servlet.MockMvc;
 
-@DisplayName("회원가입 테스트")
-class UserControllerTest extends BaseControllerTest {
+@SpringBootTest
+class UserControllerTest extends BaseIntegrationTest {
+    @MockBean
+    private UserController userController;
 
-    @Test
-    @DisplayName("회원가입 성공")
-    void createUser() throws Exception {
-        UserDto userDto = new UserDto();
 
-    }
+
+
 }
 
 //    @Test
