@@ -9,8 +9,8 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 class UserControllerTest extends BaseIntegrationTest {
-    @MockBean
-    private UserController userController;
+//    @MockBean
+//    private UserController userController;
 
 
 
