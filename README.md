@@ -1,6 +1,6 @@
 # Magazine-BE-Kiwon
 
-# 항해 Spring 2-3주차 개인 과제 - 로그인 사용자용 게시판 웹사이트 제작 Project
+# 항해 Spring 심화 2-3주차 개인 과제 - 로그인 사용자용 게시판 웹사이트 제작 Project
 
 ## BE 개발자 👩‍🦰
 ### 이름: 권기원
